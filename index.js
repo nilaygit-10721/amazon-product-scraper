@@ -1,6 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-const fs = require("fs"); // Import the File System module
+const fs = require("fs");
 
 async function scrapeAmazonProduct(url) {
   try {
@@ -8,6 +8,7 @@ async function scrapeAmazonProduct(url) {
     const $ = cheerio.load(data);
 
     const productName = $("#productTitle").text().trim();
+    const img = $("#imgTagWrapperId img").attr("src");
     const price = $(".a-price").text().slice(0, 5);
     const rating = $(".a-size-base").text().slice(0, 4);
     const numberOfReviews = $("#acrCustomerReviewText")
@@ -35,10 +36,9 @@ async function scrapeAmazonProduct(url) {
       price,
       rating,
       numberOfReviews,
+      img,
       productDescription,
     };
-
-    // Save the scraped data to data.json
 
     return scrapedData;
   } catch (error) {
