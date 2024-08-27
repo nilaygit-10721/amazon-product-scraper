@@ -28,10 +28,10 @@ async function searchProduct(url) {
         products.push({
           productName,
           img,
+          productURL: "https://www.amazon.in" + Purl || "N/A",
           price: price ? `₹${price}` : "N/A",
           rating: rating || "N/A",
           productDetails: productDetails || "N/A",
-          productURL: "https://www.amazon.in" + Purl || "N/A",
         });
       }
     });
